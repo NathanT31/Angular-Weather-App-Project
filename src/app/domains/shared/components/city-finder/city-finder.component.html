@@ -1,0 +1,19 @@
+<div>
+  <input
+    class="border-none outline-none text-center font-medium text-3xl uppercase tracking-widest bg-transparent"
+    type="text"
+    [value]="cityName"
+    autofocus
+    [formControl]="findCityCtrl"
+    placeholder="Enter city"
+  />
+  @if (cities.length > 0) { @for (city of cities; track $index) {
+  <li>
+    <span>{{ city.name }}, </span>
+    @if (city.state) {
+    <span>{{ city.state }}, </span>
+    }
+    <span>{{ city.country }}</span>
+  </li>
+  } }
+</div>

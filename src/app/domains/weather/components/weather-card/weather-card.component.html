@@ -1,0 +1,45 @@
+<div
+  class="tracking-wider flex flex-col max-w-xl bg-[#96D6DB] backdrop-filter backdrop-blur-xl bg-opacity-75 rounded-xl overflow-hidden outline outline-2 outline-zinc-100 shadow-xl hover:shadow-2xl animate__animated animate__fadeInRight transition duration-300 py-5"
+  [class]="'bg-[' + weatherColors[data()?.weather?.[0].?.main] + ']'"
+>
+  <div
+    class="flex flex-row justify-center divide-x-2 my-5 py-2 font-medium text-zinc-500"
+  >
+    @for (propDate of date(); track $index) {
+    <p class="px-5">{{ propDate | uppercase }}</p>
+    }
+  </div>
+  <div class="flex flex-col my-5 items-center">
+    <app-city-finder [cityName]="data()?.name" />
+    <p class="text-zinc-500 font-medium capitalize">
+      {{ data()?.sys?.country }}
+    </p>
+  </div>
+  <div>
+    <div class="flex flex-col items-center gap-1">
+      <img
+        class="w-48 border-2"
+        src="https://openweathermap.org/img/wn/10d@2x.png"
+        alt=""
+      />
+      <p class="text-zinc-600 font-medium capitalize">
+        {{ data()?.weather?.[0]?.description || data()?.weather?.[0]?.main }}
+      </p>
+      <p class="text-6xl font-semibold text-zinc-800">
+        {{ data()?.main?.temp | number : "1.0-0" }}°
+      </p>
+      <p class="text-xl font-medium text-zinc-600">
+        {{ data()?.main?.temp_min | number : "1.0-0" }}° /
+        {{ data()?.main?.temp_max | number : "1.0-0" }}°
+      </p>
+    </div>
+    <div
+      class="flex flex-row justify-center mt-8 mb-5 py-2 font-medium text-zinc-600"
+    >
+      <p class="px-5">{{ data()?.wind?.speed }}m/s</p>
+      <p class="px-5">{{ data()?.main?.humidity }}%</p>
+      <p class="px-5">{{ data()?.clouds?.all }}%</p>
+    </div>
+  </div>
+  <div></div>
+</div>
