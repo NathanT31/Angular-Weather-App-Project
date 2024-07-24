@@ -1,45 +1,73 @@
+<!-- <div
+  class="weather-card tracking-wider flex flex-col max-w-xl backdrop-filter backdrop-blur-xl bg-opacity-75 rounded-xl overflow-hidden shadow-xl hover:shadow-2xl animate__animated animate__fadeInRight transition duration-300"
+> -->
 <div
-  class="tracking-wider flex flex-col max-w-xl bg-[#96D6DB] backdrop-filter backdrop-blur-xl bg-opacity-75 rounded-xl overflow-hidden outline outline-2 outline-zinc-100 shadow-xl hover:shadow-2xl animate__animated animate__fadeInRight transition duration-300 py-5"
-  [class]="'bg-[' + weatherColors[data()?.weather?.[0].?.main] + ']'"
+  class="weather-card relative tracking-wider flex flex-col max-w-sm rounded-3xl overflow-hidden animate__animated animate__fadeInRight transition duration-300 bg-white"
 >
   <div
-    class="flex flex-row justify-center divide-x-2 my-5 py-2 font-medium text-zinc-500"
+    [class]="getColorClass(data()?.weather?.[0]?.main)"
+    [class.night]="night()"
+    class="flex flex-col py-8 items-center relative"
   >
-    @for (propDate of date(); track $index) {
-    <p class="px-5">{{ propDate | uppercase }}</p>
-    }
-  </div>
-  <div class="flex flex-col my-5 items-center">
-    <app-city-finder [cityName]="data()?.name" />
-    <p class="text-zinc-500 font-medium capitalize">
-      {{ data()?.sys?.country }}
-    </p>
-  </div>
-  <div>
-    <div class="flex flex-col items-center gap-1">
-      <img
-        class="w-48 border-2"
-        src="https://openweathermap.org/img/wn/10d@2x.png"
-        alt=""
+    <div class="flex flex-col items-center capitalize mt-7">
+      <app-city-finder
+        class="font-semibold"
+        [cityName]="data()?.name"
+        (focusChange)="onFocusChange($event)"
+        (selectedCityCoords)="onCoordinatesChange($event)"
       />
-      <p class="text-zinc-600 font-medium capitalize">
+      <p class="">
+        {{ data()?.sys?.country }}
+      </p>
+    </div>
+    <div class="flex flex-col items-center space-y-2">
+      <ng-icon [name]="weatherIcon()" size="10rem"></ng-icon>
+      <p class="capitalize">
         {{ data()?.weather?.[0]?.description || data()?.weather?.[0]?.main }}
       </p>
-      <p class="text-6xl font-semibold text-zinc-800">
+    </div>
+    <div
+      class="searching"
+      [class.searching-active]="isSearchBarFocused()"
+    ></div>
+  </div>
+  <div class="py-7 flex flex-col space-y-7">
+    <div class="flex flex-row justify-center divide-x-2">
+      @for (propDate of date(); track $index) {
+      <p class="px-5">{{ propDate | uppercase }}</p>
+      }
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <p class="text-6xl font-semibold">
         {{ data()?.main?.temp | number : "1.0-0" }}°
       </p>
-      <p class="text-xl font-medium text-zinc-600">
+      <p class="text-xl">
         {{ data()?.main?.temp_min | number : "1.0-0" }}° /
         {{ data()?.main?.temp_max | number : "1.0-0" }}°
       </p>
     </div>
-    <div
-      class="flex flex-row justify-center mt-8 mb-5 py-2 font-medium text-zinc-600"
-    >
-      <p class="px-5">{{ data()?.wind?.speed }}m/s</p>
-      <p class="px-5">{{ data()?.main?.humidity }}%</p>
-      <p class="px-5">{{ data()?.clouds?.all }}%</p>
+    <div class="flex flex-row justify-center space-x-5">
+      <p class="flex items-center">
+        <ng-icon name="phosphorWind" size="1.5rem"></ng-icon
+        ><span class="text-xl m-0 p-0 pl-1">{{ data()?.wind?.speed }}</span>
+        @if (unit() === 'Celsius') { mph } @else { m/s }
+      </p>
+      <p class="flex items-center">
+        <ng-icon name="phosphorDrop" size="1.5rem"></ng-icon
+        ><span class="text-xl m-0 p-0 pl-1">{{ data()?.main?.humidity }}</span
+        >%
+      </p>
+      <p class="flex items-center">
+        <ng-icon name="phosphorUmbrellaSimple" size="1.5rem"></ng-icon
+        ><span class="text-xl m-0 p-0 pl-1">{{ data()?.clouds?.all }}</span
+        >%
+      </p>
     </div>
   </div>
-  <div></div>
+  <button
+    class="remove-card-button absolute right-5 top-5 z-20"
+    (click)="removeCard()"
+  >
+    <ng-icon name="phosphorPlus" size="1.75rem" class="rotate-45"></ng-icon>
+  </button>
 </div>

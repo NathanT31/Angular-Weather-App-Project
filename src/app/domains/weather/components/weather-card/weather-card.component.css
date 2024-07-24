@@ -1,0 +1,105 @@
+.weather-card {
+  @apply text-zinc-700;
+  @apply font-medium;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.bg-Thunderstorm {
+  background-color: #483d8b;
+  color: #f0f2fd;
+}
+
+.bg-Drizzle {
+  background-color: #696969;
+  color: #f6f6f6;
+}
+
+.bg-Rain {
+  background-color: #2f4f4f;
+  color: #dcebe9;
+}
+.bg-Snow {
+  background-color: #ffffff;
+}
+.bg-Atmosphere {
+  background-color: #d3d3d3;
+  color: #545454;
+}
+.bg-Clear {
+  background-color: #87ceeb;
+  color: #102f41;
+}
+
+.bg-Clear.night {
+  background-color: #1e3a8a;
+  color: #eff3ff;
+}
+
+.bg-Clouds {
+  background-color: #778899;
+  color: #ecf1f3;
+}
+
+.searching::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+  @apply bg-zinc-100;
+  @apply bg-clip-padding;
+  @apply backdrop-filter;
+  @apply backdrop-blur-lg;
+  @apply bg-opacity-20;
+}
+
+.searching-active::after {
+  opacity: 1;
+}
+
+.remove-card-button {
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 0.75rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  @apply text-zinc-500;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  padding: calc(0.5rem - 1px);
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+
+.remove-card-button:hover {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  @apply text-zinc-800;
+  @apply bg-zinc-200;
+  transform: translateY(-1px);
+}
+
+.remove-card-button:active {
+  background-color: #f0f0f1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}

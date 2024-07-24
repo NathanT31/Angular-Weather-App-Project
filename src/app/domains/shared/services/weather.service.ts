@@ -12,10 +12,15 @@ export class WeatherService {
 
   constructor() {}
 
-  getWheaterByCoords(lat: number, lon: number) {
+  getWheaterByCoords(lat: number, lon: number, units: string = 'Fahrentheit') {
     const url = new URL('https://api.openweathermap.org/data/2.5/weather');
     url.searchParams.set('lat', lat.toString());
     url.searchParams.set('lon', lon.toString());
+    if (units === 'Celsius') {
+      url.searchParams.set('units', 'metric');
+    } else {
+      url.searchParams.set('units', 'imperial');
+    }
     url.searchParams.set('appid', this.apiKey);
 
     return this.http.get<WeatherData>(decodeURIComponent(url.toString()));

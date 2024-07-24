@@ -1,19 +1,32 @@
-<div>
+<div class="relative z-10">
   <input
-    class="border-none outline-none text-center font-medium text-3xl uppercase tracking-widest bg-transparent"
+    class="border-none outline-none text-center tracking-widest bg-transparent uppercase text-3xl"
     type="text"
     [value]="cityName"
-    autofocus
+    (focus)="onFocus()"
+    (blur)="onBlur()"
     [formControl]="findCityCtrl"
     placeholder="Enter city"
   />
-  @if (cities.length > 0) { @for (city of cities; track $index) {
-  <li>
-    <span>{{ city.name }}, </span>
-    @if (city.state) {
-    <span>{{ city.state }}, </span>
-    }
-    <span>{{ city.country }}</span>
-  </li>
-  } }
+  @if (cities.length > 0 && isFocused()) {
+  <div
+    class="absolute w-full max-h-52 pt-2 overflow-x-hidden overflow-y-auto scroll-smooth"
+  >
+    <ul>
+      @for (city of cities; track $index) {
+      <li
+        class="flex align-middle py-2 px-5 hover:bg-opacity-20 hover:bg-zinc-800 cursor-pointer transition-all"
+        (click)="onHandleSelectedCity(city.lat, city.lon)"
+      >
+        <ng-icon name="phosphorMapPinSimple" size="1.25rem"></ng-icon>
+        <span class="px-2">{{ city.name }},</span>
+        @if (city.state) {
+        <span class="pr-2">{{ city.state }},</span>
+        }
+        <span>{{ city.country }}</span>
+      </li>
+      }
+    </ul>
+  </div>
+  }
 </div>
