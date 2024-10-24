@@ -15,6 +15,9 @@ import {
   phosphorUmbrellaSimple,
   phosphorMapPinSimple,
   phosphorPlus,
+  phosphorInfo,
+  phosphorGithubLogo,
+  phosphorCode,
 } from '@ng-icons/phosphor-icons/regular';
 
 @Component({
@@ -36,6 +39,9 @@ import {
       phosphorUmbrellaSimple,
       phosphorMapPinSimple,
       phosphorPlus,
+      phosphorInfo,
+      phosphorGithubLogo,
+      phosphorCode,
     }),
   ],
   templateUrl: './app.component.html',

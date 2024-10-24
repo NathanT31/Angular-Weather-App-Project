@@ -1,0 +1,63 @@
+<!-- Botón flotante en la esquina inferior derecha -->
+<div class="sm:fixed bottom-5 right-5">
+  <button
+    (mouseenter)="hover = true"
+    (mouseleave)="hover = false"
+    (click)="openModal = true"
+    class="info-button"
+  >
+    <ng-icon name="phosphorInfo" size="1.75rem"></ng-icon>
+  </button>
+</div>
+
+<!-- Modal de información -->
+@if (openModal) {
+<div
+  class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-xl w-full">
+    <h2 class="text-xl font-semibold mb-4">Weather App Project</h2>
+    <p class="text-gray-700 mb-4">
+      This Angular Weather App provides real-time weather data for cities
+      worldwide, offering a user-friendly interface to explore current
+      conditions. Built with Angular and Tailwind CSS, it utilizes
+      OpenWeatherMap for accurate forecasts. Users can search for cities, switch
+      between different temperature units, and view detailed weather conditions
+      in a modern, responsive design.
+    </p>
+    <div class="flex justify-between">
+      <div class="flex items-center space-x-5">
+        <p class="flex items-center text-gray-600 gap-1">
+          Made by
+          <a
+            [href]="developerGithub"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex align-middle text-gray-600 hover:text-gray-900 transition"
+          >
+            <ng-icon name="phosphorCode" size="1.25rem"></ng-icon>
+            <span class="underline ml-1"> {{ developerName }}</span>
+          </a>
+          <span class="text-gray-400 font-extrabold">·</span>
+          <span>{{ year }}</span>
+        </p>
+        <a
+          [href]="githubLink"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex align-middle text-gray-600 hover:text-gray-900 transition"
+        >
+          <ng-icon name="phosphorGithubLogo" size="1.25rem"></ng-icon>
+          <span class="ml-1">GitHub</span>
+        </a>
+      </div>
+      <button
+        (click)="openModal = false"
+        class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+      >
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+}

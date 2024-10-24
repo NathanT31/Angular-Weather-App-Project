@@ -7,11 +7,17 @@ import {
 import { NgIconComponent } from '@ng-icons/core';
 import { WeatherCardComponent } from '@weather/components/weather-card/weather-card.component';
 import { UnitToggleComponent } from '@shared/components/unit-toggle/unit-toggle.component';
+import { FloatInfoButtonComponent } from '@shared/components/float-info-button/float-info-button.component';
 
 @Component({
   selector: 'app-weather-info',
   standalone: true,
-  imports: [WeatherCardComponent, NgIconComponent, UnitToggleComponent],
+  imports: [
+    WeatherCardComponent,
+    NgIconComponent,
+    UnitToggleComponent,
+    FloatInfoButtonComponent,
+  ],
   templateUrl: './weather-info.component.html',
   styleUrl: './weather-info.component.css',
 })
