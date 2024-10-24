@@ -3,6 +3,7 @@ import {
   effect,
   EventEmitter,
   inject,
+  OnInit,
   Output,
   signal,
 } from '@angular/core';
@@ -33,9 +34,9 @@ export class WeatherCardComponent {
   private weatherService = inject(WeatherService);
   private temperatureUnitService = inject(TemperatureUnitService);
 
-  unit = this.temperatureUnitService.temperatureUnit;
+  unit = signal(this.temperatureUnitService.getTemperatureUnit());
 
-  private iconMap: { [key: string]: any } = {
+  private readonly iconMap: { [key: string]: any } = {
     Thunderstorm: 'phosphorCloudLightning',
     Drizzle: 'phosphorCloudSnow',
     Rain: 'phosphorCloudRain',
@@ -52,31 +53,42 @@ export class WeatherCardComponent {
   });
 
   constructor() {
+    // Suscripción a los cambios en el servicio de unidad de temperatura
+    this.temperatureUnitService.temperatureUnit$.subscribe((newUnit) => {
+      this.unit.set(newUnit); // Actualiza la señal 'unit'
+    });
+
+    // Effect para refrescar la tarjeta cuando cambie la señal 'unit'
     effect(() => {
-      this.fetchData(this.coordinates());
+      this.refreshCard();
     });
   }
 
-  ngAfterViewInit() {
-    this.fetchData(this.coordinates());
-  }
+  // ngOnInit(): void {
+  //   this.fetchData();
+  // }
 
-  fetchData(coordinates: { lat: number; lon: number }) {
+  private fetchData() {
     this.weatherService
-      .getWheaterByCoords(coordinates.lat, coordinates.lon, this.unit())
+      .getWheaterByCoords(
+        this.coordinates().lat,
+        this.coordinates().lon,
+        this.unit()
+      )
       .subscribe({
         next: (weatherData) => {
           this.data.set(weatherData);
           this.formatDate();
           this.setWeatherIcon(weatherData.weather[0].main);
+          console.log('fetching data...');
         },
         error: (err) => {
-          console.log(err);
+          console.error('Error fetching weather data:', err);
         },
       });
   }
 
-  formatDate() {
+  private formatDate() {
     if (this.data) {
       const unixTimestamp = this.data()!.dt;
       const timezoneOffset = this.data()!.timezone;
@@ -95,7 +107,7 @@ export class WeatherCardComponent {
     }
   }
 
-  setWeatherIcon(weatherState: string) {
+  private setWeatherIcon(weatherState: string) {
     this.weatherIcon.set(
       this.night() && weatherState === 'Clear'
         ? 'phosphorMoon'
@@ -115,8 +127,13 @@ export class WeatherCardComponent {
   onCoordinatesChange(coords: { lat: number; lon: number }) {
     if (coords) {
       this.coordinates.set(coords);
-      this.fetchData(this.coordinates());
+      this.refreshCard();
     }
+  }
+
+  refreshCard() {
+    this.fetchData();
+    console.log('refreshing card...');
   }
 
   removeCard() {

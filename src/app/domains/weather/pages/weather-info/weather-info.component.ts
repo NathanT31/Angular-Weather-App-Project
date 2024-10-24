@@ -31,6 +31,10 @@ export class WeatherInfoComponent {
     }
   }
 
+  refreshWeatherCards() {
+    this.weatherCards.forEach((card) => card.instance.refreshCard());
+  }
+
   removeWeatherCard(componentRef: ComponentRef<WeatherCardComponent>) {
     const index = this.weatherCards.indexOf(componentRef);
     if (index !== -1) {
