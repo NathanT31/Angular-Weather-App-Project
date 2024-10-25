@@ -1,27 +1,80 @@
-# AngularWeatherAppProject
+# Angular Weather App Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
+This is a weather application built with Angular and Tailwind CSS, leveraging the OpenWeatherMap API for real-time weather data. The app allows users to search for cities and get detailed weather information including temperature, humidity, wind speed, and more.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Search weather by city name
+- Display real-time weather data
+- Responsive design using Tailwind CSS
+- Temperature unit toggle (Celsius/Fahrenheit)
+- Dynamic background changes based on weather conditions
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- [Node.js](https://nodejs.org/)
+- [Angular CLI](https://angular.io/cli)
+- [OpenWeatherMap API key](https://openweathermap.org/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+1. Clone the repository:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```bash
+   git clone https://github.com/NathanT31/Angular-Weather-App-Project.git
+   ```
 
-## Running end-to-end tests
+2. Navigate into the project directory:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```bash
+    cd Angular-Weather-App-Project
+    ```
 
-## Further help
+3. Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ```bash
+    npm install
+    ```
+
+### Running the Application
+
+Start the development server:
+
+```bash
+ng serve
+```
+
+Open <http://localhost:4200/> in your browser to see the app.
+
+### Building the Project
+
+Run <code>ng build</code> to compile the project. The output will be stored in the <code>dist/</code> folder.
+
+## Live Demo
+
+You can view the live version of the project hosted on GitHub Pages:
+[GitHub Pages Link](https://nathant31.github.io/Angular-Weather-App-Project/)
+
+## Screenshots
+
+### Macbook Air
+<center>
+    <img src="https://imgur.com/ZbVrCZH.jpg" alt="Macbook Air">
+</center>
+
+### Iphone 13 PRO MAX
+<center>
+    <img src="https://imgur.com/r6tOI1I.jpg" alt="Iphone 13 PRO MAX">
+</center>
+
+## Technologies Used
+
+- Angular
+- TailwindCSS
+- OpenWeatherMap API
+
+## License
+
+This project is licensed under the MIT License.
